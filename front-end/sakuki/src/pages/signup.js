@@ -8,8 +8,8 @@ const SignupPage = () => {
 
   return (
     <>
-    {/* <ScrollToTop/> */}
     <SignUpNavbar/>
+    {/* <ScrollToTop/> */}
     <Signup />
     <Footer/>
     </>

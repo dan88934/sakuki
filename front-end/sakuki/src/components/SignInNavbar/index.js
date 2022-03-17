@@ -36,15 +36,15 @@ const Navbar = ({ toggle }) => {
                 </MobileIcon>
                 {/* Nav menu = container for menu items */}
                 <NavMenu> 
-                    <NavItem>
-                        <NavLinks to="about"
+                    {/* <NavItem>
+                        <NavLinks to="/"
                         smooth={true}
                         duration={500}
                         spy={true}
                         exact='true'
                         offset={-80}
                         >About</NavLinks>
-                    </NavItem>
+                    </NavItem> */}
                     {/* <NavItem>
                         <NavLinks to="discover"
                          smooth={true}

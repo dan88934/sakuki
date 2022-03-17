@@ -1,41 +1,86 @@
-import React from 'react'
-import {
-    Container,
-    FormWrap,
-    Icon,
-    FormContent,
-    Form, 
-    FormH1,
-    FormLabel,
-    FormInput,
-    FormButton, 
-    Text
-} from './SignUpNavbarElements'
+import React, {useEffect, useState} from 'react'
+import {FaBars} from 'react-icons/fa'
+import {Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink} from './SignUpNavbarElements'
+import {IconContext} from 'react-icons/lib'
+import {animateScroll as scroll} from 'react-scroll';
 
-const SignIn = () => {
+const Navbar = ({ toggle }) => {
+    const [scrollNav, setScrollNav] = useState(false)
+
+    const changeNav = () => {
+        if(window.scrollY >= 80) {
+            setScrollNav(true)
+        } else {
+            setScrollNav(false)
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', changeNav)
+    }, [])
+
+    const toggleHome = () => {
+        scroll.scrollToTop();
+    }
+
   return (
     <>
-    <Container>
-        <FormWrap>
-            <FormContent>
-                <Form action="#">
-                    <FormH1>
-                        Sign up for an account
-                    </FormH1>
-                    <FormLabel htmlFor='for'>Email</FormLabel>
-                     <FormInput type='email' required />
-                    <FormLabel htmlFor='for'>Password</FormLabel>
-                     <FormInput type='password' required />
-                    <FormLabel htmlFor='for'>Confirm Password</FormLabel>
-                     <FormInput type='password' required />
-                    <FormButton type='submit'>Continue</FormButton>
-                    <Text>Forgot Password</Text>
-                </Form>
-            </FormContent>
-        </FormWrap>
-    </Container>
+    <IconContext.Provider value={{color: '#fff'}}>
+        <Nav scrollNav={scrollNav}>
+            <NavbarContainer>
+                <NavLogo to='/' onClick={toggleHome}>
+                    Sakuki
+                </NavLogo>
+                <MobileIcon onClick={toggle}>
+                    <FaBars />
+                </MobileIcon>
+                {/* Nav menu = container for menu items */}
+                <NavMenu> 
+                    {/* <NavItem>
+                        <NavLinks to="/"
+                        smooth={true}
+                        duration={500}
+                        spy={true}
+                        exact='true'
+                        offset={-80}
+                        >About</NavLinks>
+                    </NavItem> */}
+                    {/* <NavItem>
+                        <NavLinks to="discover"
+                         smooth={true}
+                         duration={500}
+                         spy={true}
+                         exact='true'
+                         offset={-80}
+                        >Discover</NavLinks>
+                    </NavItem> */}
+                    {/* <NavItem>
+                        <NavLinks to="services"
+                         smooth={true}
+                         duration={500}
+                         spy={true}
+                         exact='true'
+                         offset={-80}
+                        >Services</NavLinks>
+                    </NavItem> */}
+                    {/* <NavItem>
+                        <NavLinks to="signup"
+                         smooth={true}
+                         duration={500}
+                         spy={true}
+                         exact='true'
+                         offset={-80}
+                        >Sign Up</NavLinks>
+                    </NavItem> */}
+                </NavMenu>
+                <NavBtn>
+                    <NavBtnLink to="/signin">Sign In</NavBtnLink>
+                </NavBtn>
+            </NavbarContainer>
+        </Nav>
+        </IconContext.Provider>
     </>
   )
 }
 
-export default SignIn
+export default Navbar

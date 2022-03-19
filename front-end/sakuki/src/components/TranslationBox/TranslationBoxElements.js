@@ -39,12 +39,14 @@ export const Column1 = styled.div`
     margin-bottom: 15px;
     padding: 0 15px;
     grid-area: col1;
+    height: 150px
 `
 
 export const Column2 = styled.div`
     margin-bottom: 15px;
     padding 0 15px;
     grid-area: col2;
+    height: 150px;
 `
 
 
@@ -75,12 +77,18 @@ export const JpTranslationBox = styled.textarea`
     width: 100%;
     height: 100%; 
     box-sizing: border-box;
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px;
 `
 
 export const EngTranslationBox = styled.textarea`
     width: 100%;
     height: 100%; 
     box-sizing: border-box;
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px;
 `
 
 

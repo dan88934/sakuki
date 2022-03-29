@@ -39,12 +39,12 @@ func filterTranslation(translation string) {
 
 func translate(c *gin.Context) {
 	getBasicTranslation(c *gin.Context)
-	filterTranslation(trtext)
+	filterTranslation(translation)
 }
 
 
 func main() { //Our router - send a specific route to a function
 	router := gin.Default()
-	router.POST("/translate", getBasicTranslation)
+	router.POST("/translate", translate)
 	router.Run("localhost:8080")
 }

@@ -8,7 +8,7 @@ const SigninPage = () => {
 
   return (
     <>
-    {/* <ScrollToTop/> */}
+    <ScrollToTop/>
     <SignInNavbar />
     <Signin />
     <Footer/>

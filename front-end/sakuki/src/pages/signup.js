@@ -9,7 +9,7 @@ const SignupPage = () => {
   return (
     <>
     <SignUpNavbar/>
-    {/* <ScrollToTop/> */}
+    <ScrollToTop/>
     <Signup />
     <Footer/>
     </>

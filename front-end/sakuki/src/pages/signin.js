@@ -1,15 +1,15 @@
 import React, {useState} from 'react'
 import Signin from '../components/Signin'
-import ScrollToTop from '../components/Signin'
+import ScrollToTop from '../components/ScrollToTop'
 import Footer from '../components/Footer'
-import SignInNavbar from '../components/SignInNavbar'
+import Navbar from '../components/Navbar'
 
 const SigninPage = () => {
 
   return (
     <>
     <ScrollToTop/>
-    <SignInNavbar />
+    <Navbar cta='signup'/>
     <Signin />
     <Footer/>
     </>

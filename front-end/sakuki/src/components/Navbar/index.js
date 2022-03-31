@@ -4,7 +4,7 @@ import {Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, N
 import {IconContext} from 'react-icons/lib'
 import {animateScroll as scroll} from 'react-scroll';
 
-const Navbar = ({ toggle }) => {
+const Navbar = ({ toggle, showItems = false, cta = 'signin' }) => {
     const [scrollNav, setScrollNav] = useState(false)
 
     const changeNav = () => {
@@ -35,7 +35,8 @@ const Navbar = ({ toggle }) => {
                     <FaBars />
                 </MobileIcon>
                 {/* Nav menu = container for menu items */}
-                <NavMenu> 
+                {showItems && (
+                    <NavMenu> 
                     <NavItem>
                         <NavLinks to="about"
                         smooth={true}
@@ -47,34 +48,36 @@ const Navbar = ({ toggle }) => {
                     </NavItem>
                     {/* <NavItem>
                         <NavLinks to="discover"
-                         smooth={true}
-                         duration={500}
-                         spy={true}
-                         exact='true'
-                         offset={-80}
+                        smooth={true}
+                        duration={500}
+                        spy={true}
+                        exact='true'
+                        offset={-80}
                         >Discover</NavLinks>
                     </NavItem> */}
                     {/* <NavItem>
                         <NavLinks to="services"
-                         smooth={true}
-                         duration={500}
-                         spy={true}
-                         exact='true'
-                         offset={-80}
+                        smooth={true}
+                        duration={500}
+                        spy={true}
+                        exact='true'
+                        offset={-80}
                         >Services</NavLinks>
                     </NavItem> */}
                     <NavItem>
                         <NavLinks to="signup"
-                         smooth={true}
-                         duration={500}
-                         spy={true}
-                         exact='true'
-                         offset={-80}
+                        smooth={true}
+                        duration={500}
+                        spy={true}
+                        exact='true'
+                        offset={-80}
                         >Sign Up</NavLinks>
                     </NavItem>
-                </NavMenu>
+                    </NavMenu>
+                    )}
+                
                 <NavBtn>
-                    <NavBtnLink to="/signin">Sign In</NavBtnLink>
+                    {cta === "signup" ? (<NavBtnLink to="/signup">Sign Up</NavBtnLink>) : (<NavBtnLink to="/signin">Sign In</NavBtnLink>) }
                 </NavBtn>
             </NavbarContainer>
         </Nav>

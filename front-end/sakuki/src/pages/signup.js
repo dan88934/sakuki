@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 import Signup from '../components/Signup'
-import ScrollToTop from '../components/Signup'
+import ScrollToTop from '../components/ScrollToTop'
 import Footer from '../components/Footer'
-import SignUpNavbar from '../components/SignUpNavbar'
+import Navbar from '../components/Navbar'
 
 const SignupPage = () => {
 
   return (
     <>
-    <SignUpNavbar/>
+    <Navbar />
     <ScrollToTop/>
     <Signup />
     <Footer/>

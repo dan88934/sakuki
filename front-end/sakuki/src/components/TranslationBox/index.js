@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react'
+import React, {useState, useEffect, useCallback } from 'react'
 import { Button } from '../ButtonElements';
 import {TranslationBoxContainer, InfoWrapper, InfoRow, Column1, Column2,
         TextWrapper, TopLine, Heading, Subtitle, JpTranslationBox, EngTranslationBox, BtnWrap, SignupLink, ImgWrap,
@@ -11,14 +11,14 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
                     headLine, darkText, description, buttonLink, buttonLabel,
                     img, alt, primary, dark, dark2}) => {
     // const [inputText, setInputText] = useState('')
-    const [inputText, setInputText] = useState('')
+    // const [inputText, setInputText] = useState('')
     const [resultText, setResultText] = useState('')
 
 
-    const translateText = (e) => {
-        setInputText(e)
-        console.log(inputText)
-        setResultText(inputText)
+    const translateText = useCallback((value) => {
+        // setInputText(e)
+        // console.log(value)
+        setResultText(value)
         //Send input text to API
 
         // let data = {
@@ -31,8 +31,8 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
         //  .then((response) => {
         //     // setResultText(response.data.translatedText)
         //  })
-    } //Display loading box when API is fetchign
-
+    }, [ setResultText]) //Display loading box when API is fetchign
+    console.log(resultText)
     // useEffect(() => {
     //     axios.get('https://libretranslate.de/languages')
     //      .then((response) => {
@@ -49,14 +49,14 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
                     <TopLine>English Input</TopLine>
                     <JpTranslationBox
                     placeholder='Type text to translate into Japanese...'
-                    onChange={(e) => translateText(e.target.value)}
+                    onKeyDown={(e) => translateText(e.target.value)}
                     />
                 </Column1>
                 <Column2>
                     <TopLine>Japanese Output</TopLine>
                     <EngTranslationBox
                      placeholder='Output text...'
-                     value={resultText}
+                     defaultValue={resultText}
                     />
                 </Column2>
             </InfoRow>

@@ -49,7 +49,7 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
                     <TopLine>English Input</TopLine>
                     <JpTranslationBox
                     placeholder='Type text to translate into Japanese...'
-                    onKeyDown={(e) => translateText(e.target.value)}
+                    onInput={(e) => translateText(e.target.value)}
                     />
                 </Column1>
                 <Column2>

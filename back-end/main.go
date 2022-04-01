@@ -25,7 +25,6 @@ func getBasicTranslation(c *gin.Context) {
     } else {
         fmt.Println(err.Error())
     }
-	return trtext 
 }
 
 //Filter function - replace rude gretings with appropriate words and remove 'you'
@@ -37,14 +36,27 @@ func filterTranslation(translation string) {
 	//3. If string contains 'あなた’ (You) remove it and replace with お客様
 }
 
-func translate(c *gin.Context) {
-	getBasicTranslation(c *gin.Context)
-	filterTranslation(translation)
-}
+// func translate(c *gin.Context) {
+// 	getBasicTranslation(c *gin.Context)
+// 	filterTranslation(translation)
+// }
 
 
 func main() { //Our router - send a specific route to a function
-	router := gin.Default()
-	router.POST("/translate", translate)
-	router.Run("localhost:8080")
+	// router := gin.Default()
+	// router.POST("/translate", translate)
+	// router.Run("localhost:8080")
+
+	// englishText := "Hi"
+	translate := tr.New(tr.Config{
+        Url:   "https://trans.zillyhuhn.com/",
+        Key:   "XXX",
+    })
+
+	trtext, err := translate.Translate("I lived in Kyoto for 1 year. Kyoto is a beautiful city. ", "en", "ja")
+    if err == nil {
+        fmt.Println(trtext)
+    } else {
+        fmt.Println(err.Error())
+    }
 }

@@ -16,11 +16,11 @@ type translation struct {
 
 
 //Translate function - get basic translation from API
-func getBasicTranslation(c *gin.Context) {	
+func getBasicTranslation(c *gin.Context) string {	
 	var newTranslation translation
 
-	if err := c.BindJSON(&newTranslation); err != nil {
-		return //if there is an error - this will return the status (error) as response
+	if err := c.BindJSON(&newTranslation); err != nil  {
+		// return //if there is an error - this will return the status (error) as response
 	}
 	fmt.Println("English text is:", newTranslation.EnglishText)
 	
@@ -40,21 +40,25 @@ func getBasicTranslation(c *gin.Context) {
     }
 
 	fmt.Println("Basic translation text is:", basicTranslation)
-	// return 
+	return basicTranslation
 }
 
 //Filter function 
-func filterTranslation(text string) {
+func filterTranslation(basicTranslation string) {
 	//1. If string contains 'Oi', remove it and replace with いつもお世話になっております
-	fmt.Println("Basic translation text is:", text)
+	// fmt.Println("Test text is:", text)
+	fmt.Println("FilterTranslation basic translation: hiiiiii", basicTranslation)
 	//2. If string contains 'Yaaa!' remove it and replace with いつもお世話になっております
 
 	//3. If string contains 'あなた’ (You) remove it and replace with お客様
 }
 func translate(c *gin.Context) {
-	text := "Hello"
-	getBasicTranslation(c)
-	filterTranslation(text)
+	// var basicTranslation string 
+	// text := "Hello"
+	basicTranslation := getBasicTranslation(c)
+	// getBasicTranslation(c)
+	// fmt.Println("Translate basic translation:", basicTranslation)
+	filterTranslation(basicTranslation)
   }
 
 

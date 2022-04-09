@@ -43,11 +43,15 @@ func filterTranslation(basicTranslation string) {
 
 	//1. If string contains 'Oi', remove it and replace with いつもお世話になっております
 	fmt.Println("FilterTranslation basic translation", basicTranslation)
-	oi := "おい"
-	res1, err := regexp.MatchString(oi, basicTranslation)
-	fmt.Println("Result and Error is:", res1, err)
+	// oi := "おい"
+	var oi = regexp.MustCompile(`おい`)
+	// res1, err := regexp.MatchString(oi, basicTranslation)
+	// fmt.Println("Result and Error is:", res1, err)
 
 	//if res1 = true
+	// oiRemovedTranslation := regexp.ReplaceAllString(basicTranslation, oi)
+	oiRemovedTranslation := oi.ReplaceAllString(basicTranslation, "Hello")
+	fmt.Println(oiRemovedTranslation)
 
 	//2. If string contains 'Yaaa!' remove it and replace with いつもお世話になっております
 	ya := "やあ！"

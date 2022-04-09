@@ -3,7 +3,7 @@ package main
 import (
 	// "net/http"
 	"github.com/gin-gonic/gin"
-	tr "github.com/snakesel/libretranslate"
+	gt "github.com/bas24/googletranslatefree"
 	"fmt"
 	// "encoding/json"
 	// "io/ioutil"
@@ -20,19 +20,13 @@ func getBasicTranslation(c *gin.Context) string {
 	var newTranslation translation
 
 	if err := c.BindJSON(&newTranslation); err != nil  {
-		// return //if there is an error - this will return the status (error) as response
+		return err.Error() //if there is an error - this will return the status (error) as response
 	}
 	fmt.Println("English text is:", newTranslation.EnglishText)
 	
-	translate := tr.New(tr.Config{
-        Url:   "https://translate.argosopentech.com/", //Add error handler for if one of the APIs is down
-        Key:   "XXX",
-    })
-
-	basicTranslation, err := translate.Translate("I am Dan ", "en", "ja")
+	basicTranslation, err := gt.Translate(newTranslation.EnglishText, "en", "ja")
     if err == nil {
-        fmt.Println(basicTranslation)
-        fmt.Println("No error ")
+        fmt.Println("No error")
 
     } else {
         fmt.Println(err.Error(), "Error")
@@ -46,8 +40,8 @@ func getBasicTranslation(c *gin.Context) string {
 //Filter function 
 func filterTranslation(basicTranslation string) {
 	//1. If string contains 'Oi', remove it and replace with いつもお世話になっております
-	// fmt.Println("Test text is:", text)
-	fmt.Println("FilterTranslation basic translation: hiiiiii", basicTranslation)
+	
+	fmt.Println("FilterTranslation basic translation", basicTranslation)
 	//2. If string contains 'Yaaa!' remove it and replace with いつもお世話になっております
 
 	//3. If string contains 'あなた’ (You) remove it and replace with お客様

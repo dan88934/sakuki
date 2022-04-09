@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	gt "github.com/bas24/googletranslatefree"
 	"fmt"
+	"regexp"
 	// "encoding/json"
 	// "io/ioutil"
 	// "errors"
@@ -39,12 +40,24 @@ func getBasicTranslation(c *gin.Context) string {
 
 //Filter function 
 func filterTranslation(basicTranslation string) {
+
 	//1. If string contains 'Oi', remove it and replace with いつもお世話になっております
-	
 	fmt.Println("FilterTranslation basic translation", basicTranslation)
+	oi := "おい"
+	res1, err := regexp.MatchString(oi, basicTranslation)
+	fmt.Println("Result and Error is:", res1, err)
+
+	//if res1 = true
+
 	//2. If string contains 'Yaaa!' remove it and replace with いつもお世話になっております
+	ya := "やあ！"
+	res2, err := regexp.MatchString(ya, basicTranslation)
+	fmt.Println("Result and Error is:", res2, err)
 
 	//3. If string contains 'あなた’ (You) remove it and replace with お客様
+	you := "あなた"
+	res3, err := regexp.MatchString(you, basicTranslation)
+	fmt.Println("Result and Error is:", res3, err)
 }
 func translate(c *gin.Context) {
 	// var basicTranslation string 

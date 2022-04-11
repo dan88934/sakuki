@@ -16,30 +16,43 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
 
 
     const translateText = useCallback((value) => {
-        // setInputText(e)
-        // console.log(value)
-        setResultText(value)
+        // setResultText(value)
         //Send input text to API
-
+        // const response = await fetch(`localhost:8080/translate`, {
+        //     method: 'POST',
+        //     headers: {'Content-Type': 'application/json'},
+        //     body: JSON.stringify({englishText: value})
+        // })
+        // return await.response.json()
         // let data = {
         //     q : inputText,
         //     source : en,
         //     target: 
-        // }        }
+        // }      
 
         // axios.post(`https://libretranslate.de/languages`, data)
         //  .then((response) => {
         //     // setResultText(response.data.translatedText)
         //  })
+        setResultText(value)
     }, [ setResultText]) //Display loading box when API is fetchign
     console.log(resultText)
+
+    const translateText2 = useCallback((value) => {
+        let data = {
+            englishText : value
+        }
+        axios.post(`http://localhost:8000/translate`, data)
+        .then((response) => {
+            setResultText(value)
+        })
     // useEffect(() => {
     //     axios.get('https://libretranslate.de/languages')
     //      .then((response) => {
     //      console.log(response.data)
     // })
     // }, [])
-
+    }, [ setResultText])
   return (
     <>
     <TranslationBoxContainer>
@@ -49,7 +62,7 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
                     <TopLine>English Input</TopLine>
                     <JpTranslationBox
                     placeholder='Type text to translate into Japanese...'
-                    onInput={(e) => translateText(e.target.value)}
+                    onInput={(e) => translateText2(e.target.value)}
                     />
                 </Column1>
                 <Column2>
@@ -66,4 +79,4 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
   )
 }
 
-export default InfoSection
+export default InfoSection 

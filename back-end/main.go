@@ -6,6 +6,7 @@ import (
 	gt "github.com/bas24/googletranslatefree"
 	"fmt"
 	"regexp"
+	"github.com/gin-contrib/cors"
 	// "encoding/json"
 	// "io/ioutil"
 	// "errors"
@@ -16,10 +17,9 @@ type translation struct {
 }
 
 
-//Translate function - get basic translation from API
 func getBasicTranslation(c *gin.Context) string {	
+	//1. Get basic translation from Google API
 	var newTranslation translation
-
 	if err := c.BindJSON(&newTranslation); err != nil  {
 		return err.Error() //if there is an error - this will return the status (error) as response
 	}
@@ -83,26 +83,26 @@ func removeYou(translation string) string {
 }
 
 func translate(c *gin.Context) {
-	// var basicTranslation string 
-	// text := "Hello"
+	// c.Header("Access-Control-Allow-Origin", "http://localhost:8000/translate")
+    // c.Header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS")
 	basicTranslation := getBasicTranslation(c)
 	fmt.Println("translate - Basic translation text", basicTranslation)
-	// getBasicTranslation(c)
-	// fmt.Println("Translate basic translation:", basicTranslation)
-	// filterTranslation(basicTranslation)
 	translation := removeOi(basicTranslation)
 	fmt.Println("translate - Oi removed ",translation)
 	translation = removeYa(translation)
 	fmt.Println("translate - Ya Removed", translation)
 	translation = removeYou(translation)
-	fmt.Println("transltion - You removed", translation)
+	fmt.Println("translate - You removed", translation)
   }
 
 
 
 func main() { //Our router - send a specific route to a function
 	router := gin.Default()
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowOrigins = []string{"http://localhost:3000"} //Allowing 
+	corsConfig.AddAllowMethods("OPTIONS")
+	router.Use(cors.New(corsConfig))
 	router.POST("/translate", translate)
-	router.Run("localhost:8080")
-
+	router.Run("localhost:8000")
 }

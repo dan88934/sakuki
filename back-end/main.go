@@ -7,9 +7,6 @@ import (
 	"fmt"
 	"regexp"
 	"github.com/gin-contrib/cors"
-	// "encoding/json"
-	// "io/ioutil"
-	// "errors"
 )
 
 type translation struct {
@@ -83,8 +80,6 @@ func removeYou(translation string) string {
 }
 
 func translate(c *gin.Context) {
-	// c.Header("Access-Control-Allow-Origin", "http://localhost:8000/translate")
-    // c.Header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS")
 	basicTranslation := getBasicTranslation(c)
 	fmt.Println("translate - Basic translation text", basicTranslation)
 	translation := removeOi(basicTranslation)
@@ -93,6 +88,7 @@ func translate(c *gin.Context) {
 	fmt.Println("translate - Ya Removed", translation)
 	translation = removeYou(translation)
 	fmt.Println("translate - You removed", translation)
+	c.JSON(200, translation)
   }
 
 

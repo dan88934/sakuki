@@ -51,11 +51,11 @@ func removeOi(basicTranslation string) string {
 
 func removeYa(translation string) string {
 	//3. If 'Ya!' is in the text, remove 'Ya!' and replace it with 'Hello'. 'Ya!' appears when 'Hi' is typed in English
-	ya_text := "やあ！"
+	ya_text := "やあ"
 	res1, err := regexp.MatchString(ya_text, translation)
 	fmt.Println("Result and Error is:", res1, err)
 	if res1 { //If 'Ya!' in text
-		var ya = regexp.MustCompile(`やあ！`)
+		var ya = regexp.MustCompile(`やあ`)
 		translation = ya.ReplaceAllString(translation, "こんにちは")
 		return translation
 	} else {
@@ -67,11 +67,17 @@ func removeYa(translation string) string {
 func removeYou(translation string) string {
 	//4. If 'You' (あなた) is in the text, remove it from the text and replace it with 'The customer' (お客様). This is the appropriate word to use in Japanese
 	you_text := "あなた"
+	you_kanji_text := "貴方"
 	res1, err := regexp.MatchString(you_text, translation)
+	res2, err := regexp.MatchString(you_kanji_text, translation)
 	fmt.Println("Result and Error is:", res1, err)
 	if res1 { //If 'You' in text
 		var you = regexp.MustCompile(`あなた`)
 		translation = you.ReplaceAllString(translation, "お客様")
+		return translation
+	} else if res2 { //If 'You' kanji in text
+		var you_kanji = regexp.MustCompile(`貴方`)
+		translation = you_kanji.ReplaceAllString(translation, "お客様")
 		return translation
 	} else {
 		fmt.Println("You is not in text")
@@ -96,7 +102,7 @@ func translate(c *gin.Context) {
 func main() { //Our router - send a specific route to a function
 	router := gin.Default()
 	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowOrigins = []string{"http://localhost:3000"} //Allowing 
+	corsConfig.AllowOrigins = []string{"http://localhost:3000"} //Allowing dev server to send data to API
 	corsConfig.AddAllowMethods("OPTIONS")
 	router.Use(cors.New(corsConfig))
 	router.POST("/translate", translate)

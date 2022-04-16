@@ -14,11 +14,15 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
         let data = {
             englishText : value
         }
-        axios.post(`http://localhost:8000/translate`, data)
-        .then((response) => {
+        if (data.englishText !== '') { 
+            axios.post(`http://localhost:8000/translate`, data)
+            .then((response) => {
             setResultText(response.data)
             console.log(response)
         })
+        } else {
+            setResultText('') //An error occurs on API when you send it an empty string
+        }
     }, [ setResultText])
   return (
     <>

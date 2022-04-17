@@ -89,6 +89,7 @@ export const EngTranslationBox = styled.textarea`
     border-radius: 25px;
     border: 2px solid #73AD21;
     padding: 20px;
+    caret-color: transparent;
 `
 
 

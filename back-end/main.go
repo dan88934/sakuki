@@ -2,34 +2,35 @@ package main
 
 import (
 	// "net/http"
-	"github.com/gin-gonic/gin"
-	gt "github.com/bas24/googletranslatefree"
 	"fmt"
 	"regexp"
+
+	gt "github.com/bas24/googletranslatefree"
+	"github.com/dan88934/sakuki/back-end/controller/users"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
 type translation struct {
 	EnglishText string `json:"englishText"`
 }
 
-
-func getBasicTranslation(c *gin.Context) string {	
+func getBasicTranslation(c *gin.Context) string {
 	//1. Get basic translation from Google API
 	var newTranslation translation
-	if err := c.BindJSON(&newTranslation); err != nil  {
+	if err := c.BindJSON(&newTranslation); err != nil {
 		return err.Error() //if there is an error - this will return the status (error) as response
 	}
 	// fmt.Println("English text is:", newTranslation.EnglishText)
-	
-	basicTranslation, err := gt.Translate(newTranslation.EnglishText, "en", "ja")
-    if err == nil {
-        fmt.Println("No error")
 
-    } else {
-        fmt.Println(err.Error(), "Error")
+	basicTranslation, err := gt.Translate(newTranslation.EnglishText, "en", "ja")
+	if err == nil {
+		fmt.Println("No error")
+
+	} else {
+		fmt.Println(err.Error(), "Error")
 		fmt.Println("Error")
-    }
+	}
 	return basicTranslation
 }
 
@@ -89,15 +90,13 @@ func translate(c *gin.Context) {
 	basicTranslation := getBasicTranslation(c)
 	fmt.Println("translate - Basic translation text", basicTranslation)
 	translation := removeOi(basicTranslation)
-	fmt.Println("translate - Oi removed ",translation)
+	fmt.Println("translate - Oi removed ", translation)
 	translation = removeYa(translation)
 	fmt.Println("translate - Ya Removed", translation)
 	translation = removeYou(translation)
 	fmt.Println("translate - You removed", translation)
 	c.JSON(200, translation)
-  }
-
-
+}
 
 func main() { //Our router - send a specific route to a function
 	router := gin.Default()
@@ -106,5 +105,6 @@ func main() { //Our router - send a specific route to a function
 	corsConfig.AddAllowMethods("OPTIONS")
 	router.Use(cors.New(corsConfig))
 	router.POST("/translate", translate)
+	router.POST("/api/register", users.Register)
 	router.Run("localhost:8000")
 }

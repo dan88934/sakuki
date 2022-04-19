@@ -11,7 +11,7 @@ function App() {
   return (
    <Router>
      {/* <Navbar /> */}
-     <Routes>
+     <Routes> 
         <Route exact path="/" element={<Home/>} />
         <Route exact path="/app" element={<AppPage/>}/>
         <Route exact path="/signin" element={<SigninPage/>}/>

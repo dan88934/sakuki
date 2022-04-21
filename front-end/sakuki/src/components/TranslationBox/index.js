@@ -25,9 +25,9 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
         }
     }, [ setResultText])
 
-    const handleOutputBoxInput = e => {
-        e.preventDefault() //Stops user from being able to directly delete/edit text in output box
-    }
+    // const handleOutputBoxInput = e => {
+    //     e.preventDefault() //Stops user from being able to directly delete/edit text in output box
+    // }
 
   return (
     <>
@@ -46,7 +46,7 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
                     <EngTranslationBox
                      placeholder='Output text...'
                      defaultValue={resultText}
-                     onKeyDown={handleOutputBoxInput} //OnKeyDown handles both backspace and inputting text
+                     readOnly
                     />
                 </Column2>
             </InfoRow>

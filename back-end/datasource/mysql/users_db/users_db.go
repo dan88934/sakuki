@@ -11,7 +11,7 @@ import (
 var (
 	Client   *sql.DB //Pointer to sql.DB
 	username = "root"
-	password = ""
+	password = "V8.cY.dyGVGZKyKnLhZi"
 	host     = "127.0.0.1:3306"
 	schema   = "users_db_02"
 )

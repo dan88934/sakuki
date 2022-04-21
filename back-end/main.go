@@ -106,5 +106,8 @@ func main() { //Our router - send a specific route to a function
 	router.Use(cors.New(corsConfig))
 	router.POST("/translate", translate)
 	router.POST("/api/register", users.Register)
+	router.POST("api/login", users.Login)
+	router.POST("api/user", users.Get)
+	router.POST("api/logout", users.Logout)
 	router.Run("localhost:8000")
 }

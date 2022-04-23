@@ -1,6 +1,7 @@
 package users
 
 import (
+	// "fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -97,7 +98,7 @@ func Get(c *gin.Context) {
 		c.JSON(restErr.Status, restErr)
 		return
 	}
-
+	// fmt.Println(result)
 	c.JSON(http.StatusOK, result)
 }
 

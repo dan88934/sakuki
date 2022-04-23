@@ -102,6 +102,7 @@ func main() { //Our router - send a specific route to a function
 	router := gin.Default()
 	corsConfig := cors.DefaultConfig()
 	corsConfig.AllowOrigins = []string{"http://localhost:3000"} //Allowing dev server to send data to API
+	corsConfig.AllowCredentials = true 
 	corsConfig.AddAllowMethods("OPTIONS")
 	router.Use(cors.New(corsConfig))
 	router.POST("/translate", translate)

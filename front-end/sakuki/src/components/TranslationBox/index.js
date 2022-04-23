@@ -10,7 +10,7 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
 
     const [resultText, setResultText] = useState('')
 
-    const translateText2 = useCallback((value) => {
+    const translateText2 = useCallback((value, {firstName}) => {
         let data = {
             englishText : value
         }
@@ -32,6 +32,9 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
   return (
     <>
     <TranslationBoxContainer>
+        {/* <Heading value={firstName}> */}
+          {/* <h1>{firstName}</h1> */}
+        {/* </Heading> */}
         <InfoWrapper>
             <InfoRow>
                 <Column1>

@@ -9,8 +9,10 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
                     img, alt, primary, dark, dark2}) => {
 
     const [resultText, setResultText] = useState('')
+    // const [headingText, setHeadingText] = useState('')
 
-    const translateText2 = useCallback((value, {firstName}) => {
+    // console.log(firstName)
+    const translateText2 = useCallback((value) => {
         let data = {
             englishText : value
         }
@@ -19,21 +21,19 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
             .then((response) => {
             setResultText(response.data)
             console.log(response)
+            // console.log('Trans 2 if',headingText)
         })
         } else {
             setResultText('') //An error occurs on API when you send it an empty string
         }
     }, [ setResultText])
 
-    // const handleOutputBoxInput = e => {
-    //     e.preventDefault() //Stops user from being able to directly delete/edit text in output box
-    // }
 
   return (
     <>
     <TranslationBoxContainer>
         {/* <Heading value={firstName}> */}
-          {/* <h1>{firstName}</h1> */}
+          {/* <h1>{headingText}</h1> */}
         {/* </Heading> */}
         <InfoWrapper>
             <InfoRow>

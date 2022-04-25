@@ -29,11 +29,12 @@ function App() {
       return <Navigate to={redirectPath} replace />;
     } else {
       console.log('name != blank')
-      return <AppPage />
+      console.log('protected route else',firstName)
+      return <AppPage firstName={firstName}/>
 
     }
   }
-
+  console.log('global App.js',firstName)
   return (
    <Router>
      {/* <Navbar /> */}
@@ -41,7 +42,7 @@ function App() {
         <Route exact path="/" element={<Home/>}/>
 
         <Route element={<ProtectedRoute firstName={firstName}/>}>
-          <Route exact path="/app" element={<AppPage firstName={firstName} />} />
+          <Route exact path="/app" element={<AppPage text={firstName} />} />
         </Route>  
 
         <Route exact path="/signin" element={<SigninPage/>}/>

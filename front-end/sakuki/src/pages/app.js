@@ -3,13 +3,13 @@ import AppNavbar from '../components/AppNavbar'
 import TranslationBox from '../components/TranslationBox'
 // import {useNavigate} from 'react-router-dom'
 
-const AppPage = (firstName) => {
+const AppPage = ({firstName}) => {
  
-  console.log(firstName)
+  console.log('app.js',{firstName})
     return (
       <>
       {/* <ScrollToTop/> */}
-      <AppNavbar/>
+      <AppNavbar firstName={firstName}/>
       <TranslationBox firstName={firstName}/>
       <Footer/>
       </>

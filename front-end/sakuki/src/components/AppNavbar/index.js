@@ -4,7 +4,7 @@ import {Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, N
 import {IconContext} from 'react-icons/lib'
 import {animateScroll as scroll} from 'react-scroll';
 
-const Navbar = ({ toggle }) => {
+const Navbar = ({ toggle, firstName }) => {
     const [scrollNav, setScrollNav] = useState(false)
 
     const changeNav = () => {
@@ -23,6 +23,8 @@ const Navbar = ({ toggle }) => {
         scroll.scrollToTop();
     }
 
+   
+
   return (
     <>
     <IconContext.Provider value={{color: '#fff'}}>
@@ -37,8 +39,19 @@ const Navbar = ({ toggle }) => {
                 {/* Nav menu = container for menu items */}
                 <NavMenu> 
                 </NavMenu>
+               {/* {firstName ? 
+                 <NavBtn>
+                 <NavBtnLink to="/api/logout">Sign Out</NavBtnLink> //This successfully put sign out on the button, but should use the existing method instead - see other navbar
+             </NavBtn>
+               : <NavBtn>
+                    <NavBtnLink to="/signup">Sign Up</NavBtnLink>
+                </NavBtn>
+               } */}
+
+
+        
                 <NavBtn>
-                    <NavBtnLink to="/signup">Sign Out</NavBtnLink>
+                    <NavBtnLink to="/signup">Sign Up</NavBtnLink>
                 </NavBtn>
             </NavbarContainer>
         </Nav>

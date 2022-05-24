@@ -77,7 +77,13 @@ const Navbar = ({ toggle, showItems = false, cta = 'signin' }) => {
                     )}
                 
                 <NavBtn>
-                    {cta === "signup" ? (<NavBtnLink to="/signup">Sign Up</NavBtnLink>) : (<NavBtnLink to="/signin">Sign In</NavBtnLink>) }
+
+                    {cta === "signup" ? (<NavBtnLink to="/signup">Sign Up</NavBtnLink>) 
+                        : 
+                        cta === "signout" ? (<NavBtnLink to="/api/logout">Sign Out</NavBtnLink>) 
+                        :
+                        (<NavBtnLink to="/signin">Sign In</NavBtnLink>) 
+                    }
                 </NavBtn>
             </NavbarContainer>
         </Nav>

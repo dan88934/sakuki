@@ -17,19 +17,23 @@ function App() {
         })
         const data = await response.json()
         setFirstName(data.first_name)
+        console.log('App.js (routes), set firstName (allowing access to app page)')
       }
     )()
   })
+
+//It needs to go to the main page (home page) to set the first name - therefore, it cannot redirect from sign in to app first time
+// because the first name has not been set yet
 
   // const firstName = 'Dan'
 
   const ProtectedRoute = ({ firstName, redirectPath = '/' }) => {
     if (!firstName) { // Stops unauthorized users from accessing app page
-      console.log('Name is blank')
+      console.log('Name is blank - unauthorized')
       return <Navigate to={redirectPath} replace />;
     } else {
-      console.log('name != blank')
-      console.log('protected route else',firstName)
+      console.log('name != blank - authorized')
+      console.log('name is:',firstName)
       return <AppPage firstName={firstName}/>
 
     }

@@ -1,12 +1,12 @@
 import React, {useState, useEffect, useCallback } from 'react'
 import {TranslationBoxContainer, InfoWrapper, InfoRow, Column1, Column2,
-        TextWrapper, TopLine, Heading, Subtitle, JpTranslationBox, EngTranslationBox } from './TranslationBoxElements'
+        TextWrapper, TopLine, Greeting, Heading, Subtitle, JpTranslationBox, EngTranslationBox } from './TranslationBoxElements'
 import axios from 'axios'
 
 //Below dynamic vars '{}' are reading from the data file 
 const InfoSection = ({lightBg, id, imgStart, topLine, lightText, 
                     headLine, darkText, description, buttonLink, buttonLabel,
-                    img, alt, primary, dark, dark2}) => {
+                    img, alt, primary, dark, dark2, email}) => {
 
     const [resultText, setResultText] = useState('')
     // const [headingText, setHeadingText] = useState('')
@@ -32,10 +32,8 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
   return (
     <>
     <TranslationBoxContainer>
-        {/* <Heading value={firstName}> */}
-          {/* <h1>{headingText}</h1> */}
-        {/* </Heading> */}
         <InfoWrapper>
+        <Greeting>Welcome {email} </Greeting>
             <InfoRow>
                 <Column1>
                     <TopLine>English Input</TopLine>

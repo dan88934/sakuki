@@ -5,53 +5,32 @@ import Home from './pages'
 import SigninPage from './pages/signin'
 import SignupPage from './pages/signup'
 import AppPage from './pages/app'
+import { AuthContextProvider, UserAuth } from './components/Signup/context/AuthContext';
 
 function App() {
 
-  const [firstName, setFirstName] = useState('')
-  useEffect(() => {
-      ;(async () => {
-        const response = await fetch('http://localhost:8000/api/user', {
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include',
-        })
-        const data = await response.json()
-        setFirstName(data.first_name)
-        console.log('App.js (routes), set firstName (allowing access to app page)')
-      }
-    )()
-  })
+const ProtectedRoute = ({children}) => {
+  const {user} = UserAuth()
 
-//It needs to go to the main page (home page) to set the first name - therefore, it cannot redirect from sign in to app first time
-// because the first name has not been set yet
-
-  // const firstName = 'Dan'
-
-  const ProtectedRoute = ({ firstName, redirectPath = '/' }) => {
-    if (!firstName) { // Stops unauthorized users from accessing app page
-      console.log('Name is blank - unauthorized')
-      return <Navigate to={redirectPath} replace />;
-    } else {
-      console.log('name != blank - authorized')
-      console.log('name is:',firstName)
-      return <AppPage firstName={firstName}/>
-
-    }
+  if (!user) {
+    return <Navigate to='/' />
   }
-  console.log('global App.js',firstName)
+  return (
+    children
+  )
+}
+
+
   return (
    <Router>
-     {/* <Navbar /> */}
+     <AuthContextProvider>
      <Routes> 
         <Route exact path="/" element={<Home/>}/>
-
-        <Route element={<ProtectedRoute firstName={firstName}/>}>
-          <Route exact path="/app" element={<AppPage text={firstName} />} />
-        </Route>  
-
+          <Route exact path="/app" element={<ProtectedRoute><AppPage /></ProtectedRoute>} />
         <Route exact path="/signin" element={<SigninPage/>}/>
         <Route exact path="/signup" element={<SignupPage/>}/>
      </Routes>
+     </AuthContextProvider>
     </Router>
   );
 }

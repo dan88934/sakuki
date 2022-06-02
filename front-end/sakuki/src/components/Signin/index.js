@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import {useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { UserAuth } from '../Signup/context/AuthContext'
 import {
     Container,
     FormWrap,
@@ -13,29 +14,23 @@ import {
 } from './SigninElements'
 
 const SignIn = () => {
-
+    const { login } = UserAuth();
     let navigate = useNavigate()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
 
-    const submitHandler = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-
-        //Interact with API using fetch
-        await fetch('http://localhost:8000/api/login', {
-            method: 'POST', 
-            headers: {'Content-type': 'application/json'},
-            credentials: 'include',
-            body: JSON.stringify({
-                email,
-                password,
-            })
-        })
-
-       
-
-        navigate('/app')
+        setError('')
+        try {
+            await login(email, password)
+            navigate('/app')
+        } catch (e) {
+            setError(e.message)
+            console.log(e.message)
+        }
     }
 
   return (
@@ -43,7 +38,7 @@ const SignIn = () => {
     <Container>
         <FormWrap>
             <FormContent>
-                <Form onSubmit={submitHandler}>
+                <Form onSubmit={handleSubmit}>
                     <FormH1>
                         Sign in to your account
                     </FormH1>

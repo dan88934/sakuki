@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import { UserAuth } from './context/AuthContext';
+
 import {
     Container,
     FormWrap,
@@ -13,31 +15,62 @@ import {
 } from './SignupElements'
 
 
-const SignIn = () => {
 
-    let navigate = useNavigate()
+const Signup = () => {
+
+    // let navigate = useNavigate()
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+    const { createUser } = UserAuth();
+    const navigate = useNavigate();
+
+    // const submitHandler = async(e) => {
+    //     e.preventDefault()
+
+    //     //Interact with API
+    //     await fetch('http://localhost:8000/api/register', {
+    //         method: 'POST', 
+    //         headers: {'Content-type': 'application/json'},
+    //         body: JSON.stringify({
+    //             first_name: firstName, //We defined the name JSON to be first_name in the DTO 
+    //             last_name: lastName,
+    //             email,
+    //             password,
+    //         })
+    //     })
+
+    //     navigate('/signin')
+    // }
 
     const submitHandler = async(e) => {
         e.preventDefault()
+        setError('')
+        try {
+            await createUser(email, password)
+            console.log('created user')
+            navigate('/app')
+        } catch (e) {
+            setError(e.message)
+            console.log('submit error',e)
+        }
 
-        //Interact with API
-        await fetch('http://localhost:8000/api/register', {
-            method: 'POST', 
-            headers: {'Content-type': 'application/json'},
-            body: JSON.stringify({
-                first_name: firstName, //We defined the name JSON to be first_name in the DTO 
-                last_name: lastName,
-                email,
-                password,
-            })
-        })
+        // //Interact with API
+        // await fetch('http://localhost:8000/api/register', {
+        //     method: 'POST', 
+        //     headers: {'Content-type': 'application/json'},
+        //     body: JSON.stringify({
+        //         first_name: firstName, //We defined the name JSON to be first_name in the DTO 
+        //         last_name: lastName,
+        //         email,
+        //         password,
+        //     })
+        // })
 
-        navigate('/signin')
+        // navigate('/signin')
     }
 
   return (
@@ -56,7 +89,7 @@ const SignIn = () => {
                                 onChange={e => setEmail(e.target.value)}
                      />
 
-                    <FormLabel htmlFor='for'>First Name</FormLabel>
+                    {/* <FormLabel htmlFor='for'>First Name</FormLabel>
                      <FormInput type='text' 
                                 required 
                                 value={firstName}
@@ -68,7 +101,7 @@ const SignIn = () => {
                                 required 
                                 value={lastName}
                                 onChange={e => setLastName(e.target.value)}
-                     />
+                     /> */}
 
                     <FormLabel htmlFor='for'>Password</FormLabel>
                      <FormInput type='password'
@@ -90,4 +123,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default Signup

@@ -1,11 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import {FaBars} from 'react-icons/fa'
-import {Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink} from './NavbarElements'
+import {Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink, LogOutLink} from './NavbarElements'
 import {IconContext} from 'react-icons/lib'
 import {animateScroll as scroll} from 'react-scroll';
+// import { MdLogout } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom'
+import { UserAuth } from '../Signup/context/AuthContext'
 
 const Navbar = ({ toggle, showItems = false, cta = 'signin' }) => {
+    const { user, logout } = UserAuth()
     const [scrollNav, setScrollNav] = useState(false)
+    const navigate = useNavigate();
 
     const changeNav = () => {
         if(window.scrollY >= 80) {
@@ -21,6 +26,17 @@ const Navbar = ({ toggle, showItems = false, cta = 'signin' }) => {
 
     const toggleHome = () => {
         scroll.scrollToTop();
+    }
+
+    const handleLogout = async () => {
+        try {
+            await logout()
+            navigate('/')
+            console.log('You are logged out')
+        } catch (e) {
+            console.log('HandleLogout catch')
+            console.log(e.message)
+        }
     }
 
   return (
@@ -46,24 +62,6 @@ const Navbar = ({ toggle, showItems = false, cta = 'signin' }) => {
                         offset={-80}
                         >About</NavLinks>
                     </NavItem>
-                    {/* <NavItem>
-                        <NavLinks to="discover"
-                        smooth={true}
-                        duration={500}
-                        spy={true}
-                        exact='true'
-                        offset={-80}
-                        >Discover</NavLinks>
-                    </NavItem> */}
-                    {/* <NavItem>
-                        <NavLinks to="services"
-                        smooth={true}
-                        duration={500}
-                        spy={true}
-                        exact='true'
-                        offset={-80}
-                        >Services</NavLinks>
-                    </NavItem> */}
                     <NavItem>
                         <NavLinks to="signup"
                         smooth={true}
@@ -80,7 +78,7 @@ const Navbar = ({ toggle, showItems = false, cta = 'signin' }) => {
 
                     {cta === "signup" ? (<NavBtnLink to="/signup">Sign Up</NavBtnLink>) 
                         : 
-                        cta === "signout" ? (<NavBtnLink to="/api/logout">Sign Out</NavBtnLink>) 
+                        cta === "signout" ? (<LogOutLink onClick={handleLogout}>Sign Out</LogOutLink>) 
                         :
                         (<NavBtnLink to="/signin">Sign In</NavBtnLink>) 
                     }

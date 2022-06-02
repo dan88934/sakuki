@@ -6,7 +6,7 @@ import (
 	"regexp"
 
 	gt "github.com/bas24/googletranslatefree"
-	"github.com/dan88934/sakuki/back-end/controller/users"
+	// "github.com/dan88934/sakuki/back-end/controller/users"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -106,9 +106,9 @@ func main() { //Our router - send a specific route to a function
 	corsConfig.AddAllowMethods("OPTIONS")
 	router.Use(cors.New(corsConfig))
 	router.POST("/translate", translate)
-	router.POST("/api/register", users.Register)
-	router.POST("api/login", users.Login)
-	router.GET("api/user", users.Get)
-	router.GET("api/logout", users.Logout)
+	// router.POST("/api/register", users.Register)
+	// router.POST("api/login", users.Login)
+	// router.GET("api/user", users.Get)
+	// router.GET("api/logout", users.Logout)
 	router.Run("localhost:8000")
 }

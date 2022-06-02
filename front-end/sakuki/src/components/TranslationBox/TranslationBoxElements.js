@@ -13,7 +13,7 @@ export const TranslationBoxContainer = styled.div`
 export const InfoWrapper = styled.div`
     display: grid;
     z-index: 1;
-    height: 700px;
+    height: auto;
     width 100%;
     max-width: 1100px;
     margin-right: auto;
@@ -25,8 +25,9 @@ export const InfoWrapper = styled.div`
 export const InfoRow = styled.div`
     display: grid;
     grid-auto-columns: minmax(auto, 1fr);
-    height: 600px;
+    height: 400px;
     align-items: center;
+    margin-bottom: 160px;
     grid-template-areas: ${({imgStart}) => imgStart ? "'col2 col1'" : "'col1 col2'"};
 
     @media screen and (max-width: 768px) {
@@ -71,6 +72,15 @@ export const TopLine = styled.div`
     letter spacing: 1.4px;
     text-transform: uppercase;
     margin-bottom: 16px;
+`
+
+export const Greeting = styled.div`
+    color: #01bf71;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 700;
+    letter spacing: 1.4px;
+    margin-top: 125px;
 `
 
 export const JpTranslationBox = styled.textarea`

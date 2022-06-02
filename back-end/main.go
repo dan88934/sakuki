@@ -36,7 +36,7 @@ func getBasicTranslation(c *gin.Context) string {
 
 func removeOi(basicTranslation string) string {
 	//2. If 'Oi' is in the text, replace it with 'Hello'. Oi appears when 'Hey' is typed in English
-	fmt.Println("removeOi - basic translation text", basicTranslation)
+	// fmt.Println("removeOi - basic translation text", basicTranslation)
 	oi_text := "おい"
 	res1, err := regexp.MatchString(oi_text, basicTranslation)
 	fmt.Println("Result and Error is:", res1, err)

@@ -1,4 +1,5 @@
 import Footer from '../components/Footer'
+import React from 'react'
 // import AppNavbar from '../components/AppNavbar'
 import Navbar from '../components/Navbar'
 import TranslationBox from '../components/TranslationBox'

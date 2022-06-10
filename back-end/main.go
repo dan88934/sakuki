@@ -3,10 +3,10 @@ package main
 import (
 	// "net/http"
 	"fmt"
+	"net/http"
 	"regexp"
-
 	gt "github.com/bas24/googletranslatefree"
-	// "github.com/dan88934/sakuki/back-end/controller/users"
+	"github.com/gin-contrib/static"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -100,15 +100,72 @@ func translate(c *gin.Context) {
 
 func main() { //Our router - send a specific route to a function
 	router := gin.Default()
+
 	corsConfig := cors.DefaultConfig()
 	corsConfig.AllowOrigins = []string{"http://localhost:3000"} //Allowing dev server to send data to API
-	corsConfig.AllowCredentials = true 
+	corsConfig.AllowCredentials = true
 	corsConfig.AddAllowMethods("OPTIONS")
 	router.Use(cors.New(corsConfig))
+
+	router.Use(static.Serve("/", static.LocalFile("../front-end/sakuki/dist/", true)))
+	router.LoadHTMLGlob("../front-end/sakuki/dist/index.html")
+
+	router.GET("/", func(c *gin.Context) {
+		// Call the HTML method of the Context to render a template
+		c.HTML(
+			// Set the HTTP status to 200 (OK)
+			http.StatusOK,
+			// Use the index.html template (SPA)
+			"index.html",
+			// Pass the data that the page uses (in this case, 'title')
+			gin.H{
+				"title": "Home Page",
+			},
+		)
+	})
+
+	router.GET("/app", func(c *gin.Context) {
+		// Call the HTML method of the Context to render a template
+		c.HTML(
+			// Set the HTTP status to 200 (OK)
+			http.StatusOK,
+			// Use the index.html template (SPA)
+			"index.html",
+			// Pass the data that the page uses (in this case, 'title')
+			gin.H{
+				"title": "Sakuki",
+			},
+		)
+	})
+
+	router.GET("/signin", func(c *gin.Context) {
+		// Call the HTML method of the Context to render a template
+		c.HTML(
+			// Set the HTTP status to 200 (OK)
+			http.StatusOK,
+			// Use the index.html template (SPA)
+			"index.html",
+			// Pass the data that the page uses (in this case, 'title')
+			gin.H{
+				"title": "Sign In",
+			},
+		)
+	})
+
+	router.GET("/signup", func(c *gin.Context) {
+		// Call the HTML method of the Context to render a template
+		c.HTML(
+			// Set the HTTP status to 200 (OK)
+			http.StatusOK,
+			// Use the index.html template (SPA)
+			"index.html",
+			// Pass the data that the page uses (in this case, 'title')
+			gin.H{
+				"title": "Sign Up",
+			},
+		)
+	})
+
 	router.POST("/translate", translate)
-	// router.POST("/api/register", users.Register)
-	// router.POST("api/login", users.Login)
-	// router.GET("api/user", users.Get)
-	// router.GET("api/logout", users.Logout)
 	router.Run("localhost:8000")
 }

@@ -17,11 +17,11 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
             englishText : value
         }
         if (data.englishText !== '') { 
-            axios.post(`http://localhost:8000/translate`, data)
+            // axios.post(`http://localhost:8000/translate`, data) // 8000 is development Go server
+            axios.post(`http://localhost:8080/translate`, data) // 8080 is production Go server
             .then((response) => {
             setResultText(response.data)
             console.log(response)
-            // console.log('Trans 2 if',headingText)
         })
         } else {
             setResultText('') //An error occurs on API when you send it an empty string

@@ -99,16 +99,23 @@ func translate(c *gin.Context) {
 }
 
 func main() { //Our router - send a specific route to a function
+	gin.SetMode(gin.ReleaseMode) //Production mode
 	router := gin.Default()
 
 	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowOrigins = []string{"http://localhost:3000"} //Allowing dev server to send data to API
+	// corsConfig.AllowOrigins = []string{"http://localhost:3000"} //Allowing React dev server to send data to API
+	corsConfig.AllowOrigins = []string{"http://localhost:8080"} //Allowing this production Go server to send data to the API
 	corsConfig.AllowCredentials = true
 	corsConfig.AddAllowMethods("OPTIONS")
 	router.Use(cors.New(corsConfig))
 
-	router.Use(static.Serve("/", static.LocalFile("../front-end/sakuki/dist/", true)))
-	router.LoadHTMLGlob("../front-end/sakuki/dist/index.html")
+	// Development 
+	// router.Use(static.Serve("/", static.LocalFile("../front-end/sakuki/dist/", true)))
+	// router.LoadHTMLGlob("../front-end/sakuki/dist/index.html")
+
+	// Production (Docker) Go files are moved into the root project directory
+	router.Use(static.Serve("/", static.LocalFile("./front-end/sakuki/dist/", true)))
+	router.LoadHTMLGlob("./front-end/sakuki/dist/index.html")
 
 	router.GET("/", func(c *gin.Context) {
 		// Call the HTML method of the Context to render a template
@@ -167,5 +174,6 @@ func main() { //Our router - send a specific route to a function
 	})
 
 	router.POST("/translate", translate)
-	router.Run("localhost:8000")
+	// router.Run("localhost:8000") // Development server
+	router.Run()
 }

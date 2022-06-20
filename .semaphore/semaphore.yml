@@ -25,7 +25,7 @@ blocks:
         - name: GO111MODULE
           value: 'on'
         - name: GOPATH
-          value: ~/go
+          value: /go
       prologue:
         commands:
           - sem-version go 1.18

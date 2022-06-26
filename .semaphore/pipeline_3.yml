@@ -15,7 +15,7 @@ blocks:
             - 'ssh dan@178.62.24.63 '
             - 'expect "password:"'
             - send "$password\r";
-            - expect "Are you sure you want to continue connecting (yes/no)?"
+            - expect "Are you sure you want to continue connectin"
             - send "yes"
             - interact
             - sh deploy.sh

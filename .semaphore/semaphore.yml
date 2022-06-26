@@ -44,3 +44,7 @@ promotions:
     pipeline_file: pipeline_2.yml
     auto_promote:
       when: branch = 'master' AND result = 'passed'
+  - name: Deploy to Server
+    pipeline_file: pipeline_3.yml
+    auto_promote:
+      when: branch = 'master' AND result = 'passed'

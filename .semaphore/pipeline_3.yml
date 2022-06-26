@@ -11,11 +11,7 @@ blocks:
         - name: Push code
           commands:
             - checkout
-            - 'set password [lindex $SERVER_PASSWORD 0]'
-            - 'ssh dan@178.62.24.63 '
-            - 'expect "password:"'
-            - send "$password\r";
-            - expect "Are you sure you want to continue connectin"
-            - send "yes"
-            - interact
-            - sh deploy.sh
+            - chmod 0600 ~/.ssh/id_rsa_pa
+            - ssh-keyscan -H 178.62.24.63 >> ~/.ssh/known_hosts
+            - ssh-add ~/.ssh/id_rsa_pa
+            - ssh -oBatchMode=yes dan@178.62.24.63 bash sh deploy.sh

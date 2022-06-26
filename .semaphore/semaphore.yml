@@ -19,6 +19,8 @@ blocks:
             - 'cache restore vendor-$SEMAPHORE_GIT_BRANCH-$(checksum go.mod),vendor-$SEMAPHORE_GIT_BRANCH,vendor-master'
             - go mod vendor
             - 'cache store vendor-$SEMAPHORE_GIT_BRANCH-$(checksum go.mod),vendor-$SEMAPHORE_GIT_BRANCH,vendor-master vendor'
+      secrets:
+        - name: Sakuki SSH Key
   - name: Test back-end
     task:
       env_vars:

@@ -15,3 +15,5 @@ blocks:
             - ssh-keyscan -H 178.62.24.63 >> ~/.ssh/known_hosts
             - ssh-add ~/.ssh/id_rsa_pa
             - ssh -oBatchMode=yes dan@178.62.24.63 bash sh deploy.sh
+      secrets:
+        - name: sakuki-ssh-key

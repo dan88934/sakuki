@@ -1,7 +1,8 @@
 # deploy.sh
 
 # pull updated version of branch from repo
-# cd $APP_URL
+# Note: This deployment file is in the home dir on the server
+cd sakuki
 git fetch --all
 git reset --hard origin/$SEMAPHORE_GIT_BRANCH
 

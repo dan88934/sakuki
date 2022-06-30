@@ -17,3 +17,6 @@ blocks:
             - ssh -oBatchMode=yes dan@178.62.24.63 bash deploy.sh
       secrets:
         - name: sakuki-ssh-key
+      env_vars:
+        - name: gh_access_token
+          value: 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

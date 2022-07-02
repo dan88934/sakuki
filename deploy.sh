@@ -7,13 +7,12 @@
 # git reset --hard origin $SEMAPHORE_GIT_BRANCH
 
 cd sakuki
-set access_token [lindex $argv 0]
 git pull
-expect "Username for 'https://github.com':"
-send "dan88934"
-expect "Password for 'https://dan88934@github.com':"
-send "$access_token"
-interact
+# expect "Username for 'https://github.com':"
+# send "dan88934"
+# expect "Password for 'https://dan88934@github.com':"
+# send "$gh_access_token"
+# interact
 
 
 # restart web application - restart docker container

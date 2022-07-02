@@ -13,6 +13,7 @@ expect "Username for 'https://github.com':"
 send "dan88934"
 expect "Password for 'https://dan88934@github.com':"
 send "$access_token"
+interact
 
 
 # restart web application - restart docker container

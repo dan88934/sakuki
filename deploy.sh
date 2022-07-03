@@ -8,7 +8,7 @@ git pull
 
 # Restart Docker container
 
-docker stop sakuki
+docker kill $(docker ps -q)
 
 docker system prune -f
 

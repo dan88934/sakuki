@@ -14,4 +14,4 @@ docker system prune -f
 
 docker build -t sakuki . 
 
-docker run --rm -p 8080:8080 sakuki 
+docker run -d -p 8080:8080 sakuki 

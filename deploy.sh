@@ -10,7 +10,7 @@ git pull
 
 docker stop sakuki
 
-docker system prune
+docker system prune -f
 
 docker build -t sakuki . 
 

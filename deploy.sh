@@ -8,10 +8,10 @@ git pull
 
 # Restart Docker container
 
-sudo docker stop sakuki
+docker stop sakuki
 
-sudo docker system prune
+docker system prune
 
-sudo docker build -t sakuki . 
+docker build -t sakuki . 
 
-sudo docker run -it --rm -p 8080:8080 sakuki 
+docker run -it --rm -p 8080:8080 sakuki 

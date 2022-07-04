@@ -104,8 +104,8 @@ func main() { //Our router - send a specific route to a function
 
 	corsConfig := cors.DefaultConfig()
 	// corsConfig.AllowOrigins = []string{"http://localhost:3000"} //Allowing React dev server to send data to API
-	corsConfig.AllowOrigins = []string{"http://localhost:8080"} //Allowing production Go server to send data to the API
-	// corsConfig.AllowAllOrigins = true //Allowing this production NGINX server to send data to the API
+	// corsConfig.AllowOrigins = []string{"http://localhost:8080"} //Allowing production Go server to send data to the API
+	corsConfig.AllowAllOrigins = true //Allowing this production NGINX server to send data to the API
 	corsConfig.AllowCredentials = true
 	corsConfig.AddAllowMethods("OPTIONS")
 	router.Use(cors.New(corsConfig))

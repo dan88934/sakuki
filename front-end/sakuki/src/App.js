@@ -6,6 +6,7 @@ import Home from './pages'
 import SigninPage from './pages/signin'
 import SignupPage from './pages/signup'
 import AppPage from './pages/app'
+import Container from './components/Container/ContainerElements'
 import { AuthContextProvider, UserAuth } from './components/Signup/context/AuthContext';
 
 function App() {
@@ -23,6 +24,7 @@ const ProtectedRoute = ({children}) => {
 
 
   return (
+    <Container>
    <Router>
      <AuthContextProvider>
      <Routes> 
@@ -33,6 +35,7 @@ const ProtectedRoute = ({children}) => {
      </Routes>
      </AuthContextProvider>
     </Router>
+    </Container>
   );
 }
 

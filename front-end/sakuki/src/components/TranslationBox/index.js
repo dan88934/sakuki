@@ -18,7 +18,7 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText,
         }
         if (data.englishText !== '') { 
             // axios.post(`http://localhost:8000/translate`, data) // 8000 is development Go server
-            axios.post(`http://localhost:8080/translate`, data) // 8080 is production Go server
+            axios.post(`/translate`, data) // 8080 is production Go server
             .then((response) => {
             setResultText(response.data)
             console.log(response)

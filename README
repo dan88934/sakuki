@@ -1,0 +1,32 @@
+README
+
+============
+Description:
+============
+
+Sakuki is a business Japanese language translator. It initially uses Google translate's API to translate the string in question to Japanese. It then filters the translation which it receives from the API, removing certain inapropriate words which Google translate tends to put in translations and replacing those with the appropriate words.
+
+Sakuki removes the following terms from the translated string: 
+
+1. やあ - Produced when Google translate sees 'Hi'. Replaced with 'こんにちは'.
+
+2. おい - Produced when Google translate sees 'Hey'. Replaced with 'こんにちは'.
+
+3. あなた - Produced when Google translate sees 'you'. Replaced with 'お客様'.
+
+
+============
+Development mode notes:
+============
+
+1. May need to edit the API call location in index.js in the TranslationBox component when running the React development server
+
+2. Will need to change static file location in main.go when running React development server (search for 'Development' in there)
+
+============
+CI + CD Notes:
+============
+
+CI and CD is set up with Semaphore. There are currently tests for all the main Go functions, these can be found in main_test.go. If the code which has been pushed successfully passes the pipeline, then it is pulled to the server (Digital Ocean VPS) via Semaphore executing the deploy.sh script on the server.
+
+Note: If making changes to the React based front-end, then you should transpile the code with Webpack by running `nmp run prebuild` and `npm run build` from the sakuki dir in front-end before pushing code. 

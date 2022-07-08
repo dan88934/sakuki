@@ -16,7 +16,7 @@ Sakuki removes the following terms from the translated string:
 
 
 ============
-Development mode notes:
+Development Mode Notes:
 ============
 
 1. May need to edit the API call location in index.js in the TranslationBox component when running the React development server

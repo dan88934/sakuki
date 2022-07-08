@@ -7,6 +7,7 @@ import InfoSection from '../components/InfoSection';
 import Services from '../components/Services';
 import Footer from '../components/Footer';
 import { homeObjOne, homeObjTwo, homeObjThree } from '../components/InfoSection/Data';
+import { BodyContainer } from '../components/Container/BodyContainerElements';
 
 function Home() {
     const [isOpen, setIsOpen] = useState(false) // Links to the style condition in sidebar elements
@@ -19,6 +20,7 @@ function Home() {
 
   return (
     <>
+    <BodyContainer></BodyContainer>
     <Sidebar isOpen={isOpen} toggle={toggle}/>
     <Navbar toggle={toggle} showItems={true}/>
     <HeroSection />
